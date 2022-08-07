@@ -1,0 +1,42 @@
+Debounce with react Hooks-
+_______
+
+
+import React, { useState, useEffect, useRef } from 'react'
+import { cityData } from './Data';
+
+
+export function Debunce() {
+    const [cities, setCities] = useState(cityData);
+    const [searchedText, setText] = useState("");
+
+    let timeOut = useRef(null)
+        ;
+    const findSearch = (e) => {
+        clearTimeout(timeOut.current)
+        let searchText = e.target.value;
+        setText(searchText);
+        timeOut.current = setTimeout(() => {
+            console.log("we have delayed the xecution")
+        }, 2000)
+    }
+
+
+    return (
+        <div>
+            <input
+                type="text"
+                value={searchedText}
+                onChange={findSearch}
+            />
+            {
+                cities &&
+                cities.map((item, index) => {
+                    return (
+                        <div key={index}>{item.name}</div>
+                    )
+                })
+            }
+        </div>
+    )
+}
