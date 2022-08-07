@@ -1,0 +1,47 @@
+ useState with objects-
+__________
+
+
+import React, { useState } from 'react'
+
+export function FunctionTimer() {
+
+    const [name, setName] = useState({ firstName: '', lastName: '' });
+
+    const firstNameChange = (e) => {
+        const searchName = e.target.value;
+        setName(name => {
+            return { ...name, firstName: searchName }
+        })
+    }
+
+    const lastNameChange = (e) => {
+        const searchName = e.target.value;
+        setName(name => {
+            return { ...name, lastName: searchName }
+        })
+        
+    }
+
+    return (
+        <div>
+
+            firstName: <input type="text" value={name.firstName} onChange={firstNameChange} />
+            lastName:    <input type="text" value={name.lastName} onChange={lastNameChange} />
+            <h2>your name is : {name.firstName} and {name.lastName}</h2>
+
+        </div>
+    )
+}
+
+
+_____
+
+
+With setState it automatically merges the state we can only update the state and that will be it
+
+
+With useState, the setter function doesn’t automatically merges  we have to de structure the original state and update value which we want to
+
+
+______
