@@ -1,0 +1,61 @@
+[0:00 pm, 07/08/2022] R: useRef Hook-
+********
+
+It can be used to access a DOM nodes element directly.
+
+****
+
+
+For accessing the Dom elements
+
+import React, { useEffect, useRef } from 'react';
+
+export function Context() {
+    const inputRef = useRef(null)
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
+
+    return (
+        <div>
+            <input type="text" ref={inputRef} />
+        </div>
+    )
+}
+
+React will set the current property, always use inputRef.current
+
+
+
+Usage to persist value between re render-
+
+import React, { useState, useEffect, useRef } from 'react';
+
+export function Context() {
+    const [count, setCount] = useState(0);
+    const countRef = useRef();
+
+
+    useEffect(() => {
+        countRef.current = setInterval(() => {
+            setCount(c => c + 1)
+        }, 1000)
+
+
+        return () => clearInterval(countRef.current)
+    }, [])
+
+
+    const stop = () => {
+        clearInterval(countRef.current)
+    }
+
+    return (
+        <div>
+            count is: {count}
+            <button onClick={stop}>stop</button>
+
+        </div>
+    )
+}
