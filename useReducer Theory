@@ -1,0 +1,63 @@
+useReducer hook-
+________
+
+
+useReducer is a hook that is used for state management
+
+It is an alternative for useState
+
+useState is build using useReducer
+
+____-
+
+
+useReducer is a primitive hook
+
+_________
+
+useReducer is related to reducer
+
+________
+
+
+
+
+console.log(Array.reduce(reducerfuncton, intialvalue))
+
+
+
+Const Recucerfunction = (acc, currentVal) => acc + currentVal
+
+
+________
+
+
+Reduce method in javascript -  array.reduce(reducer, initialVal)
+
+singleValue= reducer(acc,itemVal)
+
+Reduce method returns a single value
+
+
+useReducer Hook-
+
+useReducer(reducer, initialState)
+
+newState = reducer(current state, action)
+
+
+
+_____________
+
+
+
+Imp-
+
+We have 
+
+useReducer(reducer, initialState)
+
+
+Newstate = reduce(currentState, action)
+
+useReducer return a pair pop values [newState, dispatch]
