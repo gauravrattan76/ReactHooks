@@ -1,0 +1,77 @@
+useMemo Life cycle hook-
+*******
+
+Use memo return s a memorised value
+
+import React, { useMemo, useState } from 'react'
+
+
+export function Practice() {
+    const [count, setCount] = useState(0)
+    const [sum, setSum] = useState(0);
+
+
+
+// even if we don’t update the count state, we update the satsuma state it calls it again hence better we avoid
+    const res = useMemo(() => expensiveFunction(count), [count])
+
+    function expensiveFunction(num) {
+        console.log("heavy isgetting called")
+        for (let i = 0; i < 100000000; i++) {
+            num += i;
+        }
+        return num;
+    }
+
+
+    return (
+        <div>
+            hELLO gAURAV count is {count}
+            sum is {sum}
+            <button onClick={() => setCount(c => c + 1)}>increase</button>
+            <button onClick={() => setSum(d => d + 1)}>increasesum</button>
+
+
+            result is : {res}
+        </div>
+    )
+}
+
+___
+
+
+Self example -
+import React, { useMemo, useState } from 'react'
+
+
+export function Practice() {
+    const [count, setCount] = useState(0)
+    const [sum, setSum] = useState(0);
+
+    const res = useMemo(() => expensiveFunction(2), [count])
+
+// if we don’t use memo while calling the function will run on every state changes as it causes a re renders we pass a dependency and it will only ru if the dependency changes
+
+
+    
+function expensiveFunction(num) {
+        console.log("heavy isgetting called")
+        for (let i = 0; i < 20000000; i++) {
+            num += i;
+        }
+        return num;
+    }
+
+
+    return (
+        <div>
+            hELLO gAURAV count is {count}
+            sum is {sum}
+            <button onClick={() => setCount(c => c + 1)}>increase</button>
+            <button onClick={() => setSum(d => d + 1)}>increasesum</button>
+
+
+            result is : {res}
+        </div>
+    )
+}
