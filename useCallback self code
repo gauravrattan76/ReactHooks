@@ -1,0 +1,58 @@
+Good understanding on hooks-
+*****
+
+
+Comp1
+
+import React, { useState, useEffect, useMemo } from 'react'
+import Comp2 from './Comp2'
+
+
+export function Comp1() {
+    const [count, setCount] = useState(0);
+    const [data, setData] = useState("gaurav")
+
+
+// only called once
+    const d = useMemo(() => test(), [])
+
+    function test() {
+        console.log("test is called");
+    }
+
+//only called once
+    useEffect(() => {
+        console.log("use effect")
+    }, [])
+
+    return (
+        <div>
+            Hello Gaurav count is: {count}
+            <button onClick={() => setCount(c => c + 1)}>update</button>
+            d val is {d}
+            <Comp2 data={data} />
+            <button onClick={() => setData("rattan")}>updatedata</button>
+        </div>
+    )
+}
+
+
+
+__
+
+Comp2-
+
+import React, { memo } from 'react'
+
+// if we use memo we tell that don’t re render if the dependency doesn’t change like props etc
+function Comp2({ data }) {
+    console.log("comp2 is re rendered")
+    return (
+        <div>
+            Hello Gaurav
+            data is {data}
+        </div>
+    )
+}
+
+export default memo(Comp2)
