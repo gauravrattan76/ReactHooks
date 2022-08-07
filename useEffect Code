@@ -1,0 +1,93 @@
+5.   useEeffct hook usage-
+*****
+
+Imp- useEffect is called on every re render,
+
+So if you update the state inside the useeffcet using set time out it will go in infinite loop
+
+Use effect can be used to do clean up
+
+We return a call function to do a clean up
+
+Imp to pass dependency as second param only runs when the dependencies changes
+
+
+import React, { useState, useEffect } from 'react'
+
+export function FunctionTimer() {
+
+    const [count, setCount] = useState(0)
+
+
+    useEffect(() => {
+        console.log("use effect is called")
+    }, [count])
+
+    return (
+        <div>
+            <button onClick={() => setCount(t => t + 1)}>Add Items</button>
+            <h3>count is: {count}</h3>
+        </div>
+    )
+}
+
+
+***
+
+
+6. useEffect clean up-
+____
+
+
+App.js-
+
+import React, { useState } from 'react'
+import './App.css'
+
+
+import { Practice } from './components/Practice'
+
+
+
+function App() {
+  const [expand, setExpand] = useState(true);
+  return (
+
+    <div>
+      {
+        expand &&
+        <Practice />
+      }
+      <button onClick={() => setExpand(c => !c)}>Hide</button>
+    </div>
+
+  )
+}
+
+export default App;
+
+
+
+_____
+
+import React, { useState, useEffect } from 'react'
+
+export function Practice() {
+    const [count, setCount] = useState(0);
+
+
+    useEffect(() => {
+        let timer = setTimeout(() => {
+            setCount(c => c + 1)
+        }, 1000)
+
+        return () => console.log("we are doing the cealn up")
+    }, [])
+
+    return (
+        <div>
+            count val is: {count}
+
+        </div>
+    )
+}
