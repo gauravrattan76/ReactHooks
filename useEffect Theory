@@ -1,0 +1,38 @@
+4.    useEffect life cycle hooks-
+
+It helps you perform side effect in functional component
+
+Close replacement of componentdidmount, componnetdidupdate and componentwillunmount
+
+
+
+*******
+
+Why we need useEffect life cycle hook-
+
+
+componentDidMount(){
+Document.tittle =`this is updated ${counts} times`
+Let interval = setInterval(() =>{
+Esomething
+},1000)
+}
+
+
+
+componentDidUpdate(){
+Document.tittle =`this is updated ${counts} times`
+
+}
+
+componentWillUnmount(){
+clearInterval(interval)
+}
+
+
+So we see code getting duplicated in component did mount and component did update
+
+Plus we can see that the related code is not clubbed together
+
+
+____
