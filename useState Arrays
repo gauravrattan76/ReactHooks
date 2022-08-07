@@ -1,0 +1,36 @@
+ useState with Arrays
+________
+
+import React, { useState } from 'react'
+
+export function FunctionTimer() {
+
+    const [items, setItems] = useState([])
+
+    const addItems = () => {
+        setItems(items => {
+// always restructure the array
+            return [...items, {
+                id: items.length,
+                value: Math.floor(Math.random() * 10)
+            }]
+        })
+    }
+
+
+    return (
+        <div>
+            <button onClick={addItems}>Add Items</button>
+            <ul>
+                {
+                    items &&
+                    items.map((item) => {
+                        return (
+                            <li key={item.id}>{item.value}</li>
+                        )
+                    })
+                }
+            </ul>
+        </div>
+    )
+}
