@@ -1,0 +1,98 @@
+Best example of use callback hook-
+****
+
+
+Parents.js
+
+import React, { useState, useCallback } from 'react'
+import Title from './Title'
+import Button from './Button'
+import Count from './Count'
+
+export function Parent() {
+    const [age, setAge] = useState(25)
+    const [salary, setSalary] = useState(600000)
+
+    const incrementAge = useCallback(() => {
+        setAge(a => a + 2)
+    }, [age])
+
+    const incrementSalary = useCallback(() => {
+        setSalary(a => a + 200000)
+    }, [salary])
+
+    return (
+        <div>
+            <Title />
+            <Count text="age" count={age} />
+            <Button handleClick={incrementAge}>increment age</Button>
+            <Count text="salary" count={salary} />
+            <Button handleClick={incrementSalary}>increment salary</Button>
+        </div>
+    )
+}
+
+
+
+___
+
+
+Count.js-
+
+import React, { memo } from 'react'
+
+
+function Count({ text, count }) {
+    console.log("rendering count component")
+    return (
+        <div>
+            the text is {text} and the count is {count}
+        </div>
+    )
+}
+
+export default memo(Count)
+
+
+___
+
+
+Button.js-
+
+import React, { memo } from 'react'
+
+
+function Button({ handleClick, children }) {
+    console.log("rnedderingbutton component", children)
+    return (
+        <div>
+            <button onClick={handleClick}>
+                rendnding   {children}
+            </button>
+        </div>
+    )
+}
+
+export default memo(Button)
+
+
+
+__
+
+Title.js-
+
+import React, { memo } from 'react'
+
+function Title() {
+    console.log("title component rendered")
+    return (
+        <div>
+            this is the titled component
+        </div>
+    )
+}
+
+export default memo(Title)
+
+
+____
