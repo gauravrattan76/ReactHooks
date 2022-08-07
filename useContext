@@ -1,0 +1,129 @@
+useContext Hook-
+******
+
+
+In normal terms -
+
+Create a context -
+
+import React from 'react';
+import { Comp1 } from './Comp1'
+
+// create a context using React.createContext()
+// then use a provider and assign value attribute to it
+export const userContext = React.createContext();
+
+export function Context() {
+    return (
+        <div>
+            <userContext.Provider value={"gaurav rattan"}>
+                <Comp1 />
+            </userContext.Provider>
+        </div>
+    )
+}
+
+
+
+___
+
+
+In last child consume it-
+
+import React from 'react'
+import { userContext } from './Context';
+
+export function Comp2() {
+    return (
+        <userContext.Consumer>
+            {
+                data => {
+                    return <div>
+                        {data}
+                    </div>
+                }
+            }
+        </userContext.Consumer>
+    )
+}
+
+
+
+____
+
+
+Passing two to contexts-
+
+
+import React from 'react';
+import { Comp1 } from './Comp1'
+
+// create a context using React.createContext()
+// then use a provider and assign value attribute to it
+export const userContext = React.createContext();
+export const ChannelContext = React.createContext();
+
+export function Context() {
+    return (
+        <div>
+            <userContext.Provider value={"gaurav rattan"}>
+                <ChannelContext.Provider value={"nameste"}>
+                    <Comp1 />
+                </ChannelContext.Provider>
+            </userContext.Provider>
+        </div>
+    )
+}
+
+
+
+___
+
+
+import React from 'react'
+import { userContext, ChannelContext } from './Context';
+
+export function Comp2() {
+    return (
+        <userContext.Consumer>
+            {
+                data => {
+                    return (
+                        <ChannelContext>
+                            {
+                                data1 => {
+                                    return <div>
+                                        hello {data} and {data1}
+                                    </div>
+                                }}
+                        </ChannelContext>
+                    )
+                }
+            }
+        </userContext.Consumer>
+    )
+}
+
+
+___
+
+
+With new useState Hook - onlynchnage is how we consume 
+
+
+Its a function useContext().   — takes the context as argument and retune the values
+
+
+
+import React, { useContext } from 'react'
+import { userContext, ChannelContext } from './Context';
+
+export function Comp2() {
+    const val1 = useContext(useContext);
+    const val2 = useContext(ChannelContext);
+    return (
+        <div>
+            Hello {val1} and hello {val2}
+        </div>
+    )
+}
