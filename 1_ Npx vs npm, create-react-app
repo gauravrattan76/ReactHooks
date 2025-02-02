@@ -1,0 +1,47 @@
+Both npm and npx are command-line tools associated with Node.js, but they serve different purposes.
+
+Feature	npm (Node Package Manager)	npx (Node Package eXecute)
+NPM -Purpose	Manages packages (installing, updating, removing)
+Command Use	npm install <package> to install a package
+Global Packages	Requires installing global packages (npm install -g <package>)
+Example Usage	npm install create-react-app -g →
+then create-react-app my-app	
+
+
+
+NPX- Runs Node.js packages without installing them globally
+Installation	Comes with Node.js	Comes with npm (version 5.2+ by default)
+npx <package> to run a package without installing
+Runs commands directly without global installation
+npx create-react-app my-app (runs directly)
+
+
+
+Key Differences
+npm installs packages, while npx runs packages.
+
+With npm, you need to install a package before using it, whereas npx allows direct execution.
+
+npx helps avoid global installations, ensuring you're using the latest package version without cluttering your system.
+When to Use npx?
+
+Running CLI tools like create-react-app without installing them globally.
+Using a package version different from the globally installed one.
+Running temporary Node.js scripts without permanent installation.
+Example Scenarios
+✅ Without npx (Using npm):
+
+sh
+Copy
+Edit
+npm install -g create-react-app
+create-react-app my-app
+✅ With npx:
+
+sh
+Copy
+Edit
+npx create-react-app my-app
+(No need to install globally, it runs once and exits.)
+
+In summary, use npm for package management and npx for executing Node.js commands efficiently. 🚀
