@@ -1,5 +1,12 @@
 Both npm and npx are command-line tools associated with Node.js, but they serve different purposes.
 
+NPM - IS  node package manager.
+NPX - node package runner without installing them globally
+
+creat-react-app -command-line tool that sets up a new React project with a pre-configured development environment. It helps developers quickly start a React application without worrying about build configurations like Webpack, Babel, ESLint, etc.
+
+
+
 Feature	npm (Node Package Manager)	npx (Node Package eXecute)
 NPM -Purpose	Manages packages (installing, updating, removing)
 Command Use	npm install <package> to install a package
