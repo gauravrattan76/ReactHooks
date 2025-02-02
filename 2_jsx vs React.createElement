@@ -1,0 +1,40 @@
+Yes, JSX code gets converted to React.createElement(). This transformation is handled by a compiler or transpiler, typically Babel.
+
+How JSX is Transformed
+When you write JSX like this:
+
+jsx
+
+const element = <h1>Hello, World!</h1>;
+Babel compiles it into:
+
+js
+
+const element = React.createElement("h1", null, "Hello, World!");
+
+
+jsx code -
+
+
+//     return(
+//         <div>
+//             <h1>
+//                 Hello there
+//             </h1>
+//         </div>
+//     )
+//  }
+
+
+React Element code-
+
+    return React.createElement('div', {id: 'div1', className: 'divClass'},React.createElement('h1', null, 'hello tere'))
+ 
+
+This conversion ensures that browsers, which do not natively understand JSX, can execute the equivalent JavaScript code.
+
+      Who Converts JSX?
+Babel (Common Choice)
+
+Babel is a JavaScript compiler that transforms JSX into React.createElement().
+If you're using a tool like Create React App, Next.js, or Vite, Babel (or an equivalent tool) handles this automatically.
