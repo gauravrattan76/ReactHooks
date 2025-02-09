@@ -1,0 +1,106 @@
+Pure functions -
+
+
+A pure function is a function that:
+1. Always returns the same output for the same input.
+2. Has no side effects (doesn’t modify external state, mutate variables, or perform I/O operations like API calls or DOM manipulation).
+
+
+
+function add(a, b)
+ { return a + b; // Always returns the same output for the same inputs }
+ console.log(add(2, 3)); // 5 
+console.log(add(2, 3));
+
+It only depends on its inputs (a and b).
+It has no side effects (doesn’t modify anything outside its scope).
+
+_________________
+
+let total = 0;
+ function addToTotal(value)
+ { total += value; // Modifies an external variable (side effect) return total; } 
+
+
+console.log(addToTotal(5)); // 5 console.log(addToTotal(5));
+
+
+It modifies a global variable (total).
+The output changes depending on the external state, even if the same input (5) is provided.
+
+
+Key Benefits of Pure Functions
+✔ Predictability – Given the same inputs, you always get the same output. ✔ Easier to Debug & Test – Since they don’t rely on external state, testing is simpler. ✔ Improved Performance – Pure functions can be memoized (cached) for optimization. ✔ Better Maintainability – Code is more modular and reusable.
+
+
+
+Real-World Use Cases
+✅ Array Methods (map, filter, reduce)
+js
+CopyEdit
+const numbers = [1, 2, 3, 4];
+const squaredNumbers = numbers.map(num => num * num); // Pure function
+
+console.log(squaredNumbers); // [1, 4, 9, 16]
+
+
+
+function reducer(state, action) 
+{ switch (action.type) { 
+case "INCREMENT": return { count: state.count + 1 }; // Returns a new state (pure)
+ default: return state; } }
+
+
+
+___________
+
+
+Reducers in Redux (or similar state management libraries) are pure functions because they follow these fundamental principles:
+1. Deterministic Output:
+    * Given the same input (state and action), a reducer always produces the same output (new state).
+    * There are no side effects, ensuring predictability.
+2. No Side Effects:
+    * A pure function does not modify external variables, perform API calls, log to the console, or change global state.
+    * This keeps reducers predictable and easier to test.
+3. Immutability:
+    * Instead of modifying the existing state, a reducer creates a new state object.
+    * This prevents unintended changes and makes debugging easier (e.g., time-travel debugging in Redux DevTools).
+
+
+const counterReducer = (state = 0, action) => { switch (action.type) { case 'INCREMENT': return state + 1; case 'DECREMENT': return state - 1; default: return state; // Always return a new or unchanged state } };
+
+
+
+
+const counterReducer = (state = 0, action) => { switch (action.type) { case 'INCREMENT': state++; // ❌ Directly modifying state (mutating it) return state; case 'DECREMENT': return fetch('/api/decrement') // ❌ Side effect (API call) .then(response => response.json()); default: return state; } };
+
+
+Directly Mutating State (Bad)
+Directly modifying the state inside a reducer leads to unexpected behavior and breaks the principles of immutability, making debugging and tracking changes difficult.
+js
+CopyEdit
+function counterReducer(state, action) {
+  if (action.type === "INCREMENT") {
+    state.count += 1; // ❌ Direct mutation
+    return state;
+  }
+  return state;
+}
+Problems with this approach:
+* React may not detect changes, leading to no re-render.
+* Debugging tools (like Redux DevTools) won’t track changes correctly.
+* State history for undo/redo functionality is lost.
+
+
+_______________
+
+
+
+
+
+
+
+
+
+
+
