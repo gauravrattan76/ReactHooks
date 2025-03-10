@@ -1,0 +1,59 @@
+Creating custom hooks in react-
+_________________________________
+
+
+For api calling create a use fetch hook 
+It takes url param and returns the response
+
+since hooks can be a functon whose task is to return the array payload
+
+
+Usefetch.js-
+
+
+import React, {useState,useEffect} from 'react'
+
+const Usefetch = (url) =>{
+      const [data, setData] = useState([])
+       
+       useEffect(() =>{
+        const fetchData = async() =>{
+           const res =await fetch(url)
+           const resJson = await res.json();
+           setData(resJson);
+        }
+        fetchData();
+       },[url])
+
+      return data
+}
+
+export default Usefetch
+
+
+____________________________
+
+
+import React from 'react'
+import Usefetch from './Usefetch'
+
+
+const Comp1 = () =>{
+      const res = Usefetch('https://jsonplaceholder.typicode.com/todos')
+
+    return(
+        <>
+        This is the comp1
+        <br />
+        {  res &&
+            res?.map(item => (
+                <div key={item.id}>
+                  {item.title}
+                </div>
+            ))
+        }
+        </>
+    )
+}
+
+export default Comp1
