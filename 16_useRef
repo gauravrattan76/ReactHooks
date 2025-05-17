@@ -6,6 +6,55 @@ It can be used to access a DOM nodes element directly.
 ****
 
 
+Important , user can be used to track th previous value of state too
+
+
+________
+
+can be used to track the previous state value
+key concet is renders first and then values get updated in useeffect
+
+
+to keep a track of re remder , just increment on first load, so that next time get updated  valeu
+
+
+Here to trace the previous state values -
+
+
+
+import React, { useEffect, useRef, useState } from 'react'
+
+const HookRef = () => {
+    const [count, setCount] = useState(0)
+    const countRef = useRef(0)
+
+    useEffect(() => {
+        countRef.current = count;
+    }, [count])
+
+
+    return (
+        <>
+            This is the hook ref component getting called!!
+            <br />
+            value of count state is {count}
+            <br />
+            value of count ref is {countRef.current}
+            <br />
+            <button onClick={() => setCount(p => p + 1)}>increment</button>
+        </>
+    )
+}
+
+
+export default HookRef
+
+
+
+
+_________________________
+
+
 For accessing the Dom elements
 
 import React, { useEffect, useRef } from 'react';
