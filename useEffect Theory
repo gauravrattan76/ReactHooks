@@ -4,7 +4,73 @@ It helps you perform side effect in functional component
 
 Close replacement of componentdidmount, componnetdidupdate and componentwillunmount
 
+*******************
+code -
 
+for the below, all the 3 console log gets called,
+on state update empty and dependent are called only after clean is performed for the count dependent hook
+
+output -
+
+this is the one without depedency
+Hooks2.jsx:12 this is the one with empty depedency
+Hooks2.jsx:19 this is the one with count depedency
+
+
+_______________________________
+
+
+on update count -
+
+unmounted from count depedency
+Hooks2.jsx:8 this is the one without depedency
+Hooks2.jsx:19 this is the one with count depedency
+
+________________________________
+
+import React, { useEffect, useState } from 'react'
+
+
+const Hooks2 = () => {
+const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        console.log('this is the one without depedency')
+    })
+
+    useEffect(() => {
+        console.log('this is the one with empty depedency')
+        return  () => {
+            console.log('unmounted from empty depedency')
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log('this is the one with count depedency')
+        return  () => {
+            console.log('unmounted from count depedency')
+        }
+    }, [count])
+
+    // useEffect(() =>{
+    //     console.log('this is the one with empty depedency')
+    // },[])
+
+
+
+    return (
+        <>
+            this is the  hoosk2 component!!
+            <br />
+            count value is {count}
+            <br />
+            <button onClick={() => setCount(p => p +1)}>incremenet</button>
+        </>
+    )
+}
+
+
+export default Hooks2
 
 *******
 
