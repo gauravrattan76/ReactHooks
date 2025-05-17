@@ -1,0 +1,50 @@
+import React, { createContext, useContext, useState } from 'react'
+const userContext = createContext();
+
+
+const ContextHook = () => {
+    const [user, setUser] = useState('gaurav')
+
+    const setUserName  =(val) =>{
+        setUser(val)
+    }
+    return (
+        <>
+            this is the context api getting called
+            <br />
+            <userContext.Provider value={{user, name: 'snighda', age:24, setUserName}}>
+            <Component1 />
+            <button onClick={() => setUserName('passed from parent')}>click</button>
+            </userContext.Provider>
+        </>
+    )
+}
+
+
+export const Component1 = () => {
+    return(
+        <>
+        <Component2 />
+        </>
+    )
+}
+
+
+export const useCustomedHook = () => useContext(userContext)
+
+export const Component2 = () => {
+    const data = useCustomedHook()
+
+    const childMethod   = () =>{
+        data.setUserName("dat apssed from child")
+    }
+    return(
+        <>
+        {data.user}
+        <button onClick={childMethod}>onClick</button>
+        </>
+    )
+}
+
+
+export default ContextHook
