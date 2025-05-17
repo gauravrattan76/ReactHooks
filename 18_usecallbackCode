@@ -1,0 +1,85 @@
+useCallback Code-
+________________
+
+
+Use callback returns a memorized call back,
+
+Here we were passing function to a component, on re rendering the funciton gets created again in memory
+
+
+This is because of something called "referential equality".
+Every time a component re-renders, its functions get recreated.
+
+
+Comp1-
+
+
+import React, { useCallback, useState } from 'react'
+import Comp2 from './Comp2';
+
+export const Comp1 = () =>{
+    const [count, setCount] = useState(0)
+    const [items, setItems] = useState([])
+
+
+// we just wrap the calling function with usecalback
+     const addItems = useCallback(() =>{
+        setItems(prev => [...prev,{
+            id: items.length,
+            value: Math.floor(Math.random() * 10)
+        }])
+     },[items]
+) 
+    return(
+        <div>
+            this is comp1!!
+            count val is {count}
+            <br />
+            <button onClick={() => setCount(p => p+1)}>increment</button>
+            <br />
+            <Comp2 items={items} addItems={addItems}  />
+        </div>
+    )
+
+}
+
+export default Comp1;
+
+
+
+
+________
+
+
+Comp2-
+
+import React,{memo}  from "react";
+
+
+export const Comp2 = ({items, addItems}) =>{
+    console.log('comp2 is rendered!!')
+    return(
+        <>
+        this is comp2
+        <br  />
+        {
+            items?.map(val => (
+                <div key={val.id}>
+                    {val.value}
+                </div>
+            ))
+        }
+        <br />
+        <button onClick={() => addItems()}>addItems</button>
+        </>
+    )
+
+}
+
+export default memo(Comp2)
+
+
+
+__________________
+
+
