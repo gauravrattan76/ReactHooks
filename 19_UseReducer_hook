@@ -1,0 +1,72 @@
+key is that it takes first param as the reducer funciton and the  the state-
+
+    const [state, dispatch] = useReducer(myReducer, initialState)
+
+
+
+    ______________________________________________________
+
+import React, { useReducer } from 'react'
+
+const initialState = {
+    count: 0,
+    user: {
+        name: "gaurav",
+        age: 24
+    },
+    users: [
+        "gaurav",
+        "snigdha"
+    ]
+}
+
+const myReducer = (state, action) => {
+    switch (action.type) {
+        case "INCREMENT":
+            return { ...state, count: state.count + 1 };
+        case "DECREMENT":
+            return { ...state, count: state.count - 1 };
+        case "MODIFY":
+            return {
+                ...state, user: {
+                    ...state.user,
+                    name: action.payload
+                }
+            };
+        case "ADDUSER":
+            return { ...state, users: [...state.users, action.payload] };
+        default:
+            return state;
+    }
+}
+
+
+export const MyReducer = () => {
+    const [state, dispatch] = useReducer(myReducer, initialState)
+
+    return (
+        <>
+            this is my reducer cmoponent!!
+            <br />
+            count value is {state.count}
+            <br />
+            user name is {state.user.name}
+            <br />
+            <button onClick={() => dispatch({ type: 'INCREMENT' })}>increment</button>
+            <button onClick={() => dispatch({ type: 'DECREMENT' })}>decrement</button>
+            <br />
+            <button onClick={() => dispatch({ type: 'MODIFY', payload: 'rattan' })}>modify user</button>
+            <br />
+            {
+                state.users?.map(item => (
+                    <div>
+                        {item}
+                    </div>
+                ))
+            }
+            <button onClick={() => dispatch({ type: 'ADDUSER', payload: 'rattan12' })}>add user</button>
+        </>
+    )
+}
+
+export default MyReducer;
